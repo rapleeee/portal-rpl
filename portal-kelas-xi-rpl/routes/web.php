@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\quizController;
 use App\Http\Controllers\JadwalPelajaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TaskController;
@@ -9,6 +10,8 @@ Route::get('/', function () {
     return view('dashboard', ['fitur' => config('fitur')]);
 })->name('dashboard');
 
+Route::get('/fitur/09', [quizController::class, 'index'])->name('quiz.show');
+Route::post('/fitur/09', [quizController::class, 'store'])->name('quiz.store');
 // ===== Absen 04: Pengumuman (harus di ATAS route umum /fitur/{nomor}) =====
 Route::get('/fitur/04', [PengumumanController::class, 'index'])->name('pengumuman.index');
 Route::post('/fitur/04', [PengumumanController::class, 'store'])->name('pengumuman.store');
