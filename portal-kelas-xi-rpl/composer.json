@@ -9,7 +9,9 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "scripts": {
@@ -17,7 +19,10 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "test": "@php tests/smoke.php"
+        "test": [
+            "@php tests/smoke.php",
+            "@php tests/jadwal-crud.php"
+        ]
     },
     "config": {
         "optimize-autoloader": true,

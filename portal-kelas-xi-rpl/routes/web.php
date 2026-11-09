@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JadwalPelajaranController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PengumumanController;
 
@@ -12,6 +13,10 @@ Route::get('/fitur/04', [PengumumanController::class, 'index'])->name('pengumuma
 Route::post('/fitur/04', [PengumumanController::class, 'store'])->name('pengumuman.store');
 Route::delete('/fitur/04/{pengumuman}', [PengumumanController::class, 'destroy'])->name('pengumuman.destroy');
 // ==========================================================================
+Route::get('/fitur/01', [JadwalPelajaranController::class, 'index'])->name('jadwal.index');
+Route::post('/fitur/01/pelajaran', [JadwalPelajaranController::class, 'store'])->name('jadwal.store');
+Route::put('/fitur/01/pelajaran/{pelajaran}', [JadwalPelajaranController::class, 'update'])->name('jadwal.update');
+Route::delete('/fitur/01/pelajaran/{pelajaran}', [JadwalPelajaranController::class, 'destroy'])->name('jadwal.destroy');
 
 Route::get('/fitur/{nomor}', function (string $nomor) {
     $katalog = config('fitur');
