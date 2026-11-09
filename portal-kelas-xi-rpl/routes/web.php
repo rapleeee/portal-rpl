@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('dashboard', ['fitur' => config('fitur')]);
@@ -16,3 +17,5 @@ Route::get('/fitur/{nomor}', function (string $nomor) {
         'judul' => $katalog[$nomor],
     ]);
 })->where('nomor', '[0-9]{2}')->name('fitur.show');
+
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
