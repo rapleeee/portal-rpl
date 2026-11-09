@@ -164,12 +164,6 @@
         <p>Cek giliran piketmu dan tugas yang harus dikerjakan setiap hari sebelum pulang.</p>
         <span class="summary" id="today-summary">Hari ini</span>
 
-
-        <div class="section-heading">
-            <h2>Jadwal per hari</h2>
-            <p>Senin – Jumat</p>
-        </div>
-
         <div class="section-heading with-line">
             <h2>Jadwal per hari</h2>
             <label class="minggu-picker" for="pilih-minggu">
@@ -260,38 +254,52 @@
                 </article>
             </div>
         </div>
-        <script>
-            // Tanggal Senin di Minggu 1 (ubah sesuai awal rotasi kelasmu)
-            const MULAI = new Date('2026-11-09T00:00:00');
-            const JUMLAH_MINGGU = 3;
 
-            const hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-            const sekarang = new Date();
-            const selisihHari = Math.floor((sekarang - MULAI) / 86400000);
-            const mingguIni = ((Math.floor(selisihHari / 7) % JUMLAH_MINGGU) + JUMLAH_MINGGU) % JUMLAH_MINGGU + 1;
+    </section>
+    <section class="placeholder tugas" aria-labelledby="judul-tugas">
+        <span class="badge">Pembagian tugas</span>
+        <h2 id="judul-tugas">Tugas yang harus dikerjakan</h2>
+        <ul class="task-list">
+            <li>Menyapu lantai</li>
+            <li>Menghapus papan tulis</li>
+            <li>Merapikan meja dan kursi</li>
+            <li>Membuang sampah</li>
+            <li>Mematikan lampu dan kipas</li>
+        </ul>
+    </section>
+    <script>
+        // Tanggal Senin di Minggu 1 (ubah sesuai awal rotasi kelasmu)
 
-            const pilih = document.getElementById('pilih-minggu');
-            const panels = document.querySelectorAll('.minggu-panel');
+        const MULAI = new Date('2026-11-09T00:00:00');
+        const JUMLAH_MINGGU = 3;
 
-            function tampilkan(minggu) {
-                panels.forEach(p => p.hidden = p.dataset.minggu !== String(minggu));
-            }
+        const hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const sekarang = new Date();
+        const selisihHari = Math.floor((sekarang - MULAI) / 86400000);
+        const mingguIni = ((Math.floor(selisihHari / 7) % JUMLAH_MINGGU) + JUMLAH_MINGGU) % JUMLAH_MINGGU + 1;
 
-            // Tandai opsi minggu ini dan pilih otomatis
-            pilih.querySelector('option[value="' + mingguIni + '"]').textContent += ' (minggu ini)';
-            pilih.value = mingguIni;
-            tampilkan(mingguIni);
-            pilih.addEventListener('change', () => tampilkan(pilih.value));
+        const pilih = document.getElementById('pilih-minggu');
+        const panels = document.querySelectorAll('.minggu-panel');
 
-            // Highlight kartu hari ini (hanya di minggu yang sedang berjalan)
-            const hariIni = sekarang.getDay();
-            const kartu = document.querySelector('.minggu-panel[data-minggu="' + mingguIni + '"] .piket-card[data-day="' + hariIni + '"]');
-            const label = document.getElementById('today-summary');
-            if (kartu) {
-                kartu.classList.add('is-today');
-                label.textContent = 'Hari ini: ' + hari[hariIni] + ' · ada piket';
-            } else {
-                label.textContent = 'Hari ini: ' + hari[hariIni] + ' · tidak ada piket';
-            }
-        </script>
+        function tampilkan(minggu) {
+            panels.forEach(p => p.hidden = p.dataset.minggu !== String(minggu));
+        }
+
+        // Tandai opsi minggu ini dan pilih otomatis
+        pilih.querySelector('option[value="' + mingguIni + '"]').textContent += ' (minggu ini)';
+        pilih.value = mingguIni;
+        tampilkan(mingguIni);
+        pilih.addEventListener('change', () => tampilkan(pilih.value));
+
+        // Highlight kartu hari ini (hanya di minggu yang sedang berjalan)
+        const hariIni = sekarang.getDay();
+        const kartu = document.querySelector('.minggu-panel[data-minggu="' + mingguIni + '"] .piket-card[data-day="' + hariIni + '"]');
+        const label = document.getElementById('today-summary');
+        if (kartu) {
+            kartu.classList.add('is-today');
+            label.textContent = 'Hari ini: ' + hari[hariIni] + ' · ada piket';
+        } else {
+            label.textContent = 'Hari ini: ' + hari[hariIni] + ' · tidak ada piket';
+        }
+    </script>
 @endsection
