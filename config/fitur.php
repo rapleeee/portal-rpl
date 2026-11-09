@@ -1,0 +1,27 @@
+<?php
+
+return [
+    '01' => 'Jadwal pelajaran',
+    '02' => 'Jadwal piket',
+    '03' => 'Kalender kegiatan kelas',
+    '04' => 'Papan pengumuman',
+    '05' => 'FAQ kelas',
+    '06' => 'Daftar materi',
+    '07' => 'Pencarian referensi belajar',
+    '08' => 'Glosarium RPL',
+    '09' => 'Kuis Git dasar',
+    '10' => 'Galeri proyek siswa',
+    '11' => 'Daftar tugas dengan filter status',
+    '12' => 'Penghitung hari menuju tenggat',
+    '13' => 'Checklist tugas pribadi',
+    '14' => 'Ringkasan progres tugas',
+    '15' => 'Riwayat pengumpulan tugas',
+    '16' => 'Timer Pomodoro',
+    '17' => 'Kalkulator rata-rata nilai',
+    '18' => 'Daftar perangkat lab',
+    '19' => 'Daftar ekstrakurikuler',
+    '20' => 'Daftar prestasi kelas',
+    '21' => 'Panduan penggunaan portal',
+    '22' => 'Kontak layanan sekolah',
+    '23' => 'Daftar kelompok belajar',
+];
