@@ -68,7 +68,7 @@
                 @for ($tgl = 1; $tgl <= 30; $tgl++)
                     @php
                         // Cek apakah tanggal punya event
-                        $punyaEvent = in_array($tgl, [12, 17, 25]);
+                        $punyaEvent = in_array($tgl, [11, 23, 25]);
                         $isToday = ($tgl == 9);
                     @endphp
                     <div class="day-cell {{ $isToday ? 'today' : '' }} {{ $punyaEvent ? 'has-event' : '' }}">
