@@ -54,8 +54,23 @@ foreach ($rows as $index => [, $nomor, $judul]) {
     $page = visit('/fitur/'.$nomor);
     check($page->getStatusCode() === 200, "Halaman $nomor gagal.");
     check(str_contains($page->getContent(), e($judul)), "Judul halaman salah untuk $nomor.");
+
+    if ($nomor === '09') {
+        check(str_contains($page->getContent(), 'name="name"'), 'Kuis harus meminta nama.');
+        check(str_contains($page->getContent(), 'name="kelas"'), 'Kuis harus meminta kelas.');
+        check(str_contains($page->getContent(), 'name="input"'), 'Kuis harus menyediakan jawaban esai.');
+        check(str_contains($page->getContent(), 'name="_token"'), 'Form kuis harus menyertakan token CSRF.');
+
+        continue;
+    }
+
     check(str_contains($page->getContent(), "Fitur ini akan dikerjakan oleh siswa absen $nomor."), "Placeholder salah untuk $nomor.");
 }
+
+$quizGetRoute = app('router')->getRoutes()->match(Request::create('http://localhost/fitur/09'));
+$quizPostRoute = app('router')->getRoutes()->match(Request::create('http://localhost/fitur/09', 'POST'));
+check($quizGetRoute->getActionName() === App\Http\Controllers\quizController::class.'@index', 'GET kuis harus terhubung ke controller.');
+check($quizPostRoute->getActionName() === App\Http\Controllers\quizController::class.'@store', 'POST kuis harus terhubung ke controller.');
 
 foreach (['24', '00', '99', '1', '001', 'abc', '01.css', '01/extra'] as $invalid) {
     check(visit('/fitur/'.$invalid)->getStatusCode() === 404, "Nomor $invalid harus menghasilkan 404.");
@@ -63,4 +78,4 @@ foreach (['24', '00', '99', '1', '001', 'abc', '01.css', '01/extra'] as $invalid
 
 check(! str_contains($dashboard->getContent(), '/build/'), 'Dashboard tidak boleh memerlukan build Vite.');
 check(in_array('.env', file(__DIR__.'/../.gitignore', FILE_IGNORE_NEW_LINES), true), '.env harus diabaikan Git.');
-echo "LULUS: 23 kartu dan tautan, 23 placeholder sesuai README, 8 URL tidak valid menghasilkan 404, tanpa koneksi database.\n";
+echo "LULUS: 23 kartu dan tautan, halaman kuis 09 terhubung ke controller, placeholder lain sesuai README, 8 URL tidak valid menghasilkan 404, tanpa koneksi database.\n";

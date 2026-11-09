@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\quizController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard', ['fitur' => config('fitur')]);
 })->name('dashboard');
+
+Route::get('/fitur/09', [quizController::class, 'index'])->name('quiz.show');
+Route::post('/fitur/09', [quizController::class, 'store'])->name('quiz.store');
 
 Route::get('/fitur/{nomor}', function (string $nomor) {
     $katalog = config('fitur');
