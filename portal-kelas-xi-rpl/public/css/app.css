@@ -12,6 +12,7 @@ body { margin: 0; background: #f6f9fb; color: var(--ink); font-family: system-ui
 a { color: inherit; }
 .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
 .site-header { background: var(--navy); color: white; border-bottom: 4px solid var(--orange); }
+.border-bottom { border-bottom: 2px solid var(--orange);}
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 22px; }
 .brand { text-decoration: none; font-size: 1.15rem; font-weight: 750; }
 .brand span { display: block; color: var(--mint); font-size: .75rem; letter-spacing: .14em; margin-top: 3px; }
